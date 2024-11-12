@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+todo list: 
+1. add created_at and updated_at to flash cards
+2. Add more interesting ways to decide which cards to show, based on mastery. Basically implement spaced repition properly. 
+3. Better UI design
+4. Put it online somewhere and maybe add a login system. 

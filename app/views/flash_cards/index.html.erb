@@ -1,0 +1,41 @@
+<h1>Pashto Flash Cards</h1>
+
+<div class="card">
+  <h2>Add New Card</h2>
+  <%= form_with(model: @flash_card, local: true) do |f| %>
+    <div>
+      <%= f.label :english_text, "English" %>
+      <%= f.text_field :english_text %>
+    </div>
+
+    <div>
+      <%= f.label :pashto_text, "Pashto" %>
+      <%= f.text_field :pashto_text %>
+    </div>
+
+    <%= f.submit "Create Card" %>
+  <% end %>
+</div>
+
+<div class="review-options">
+  <h2>Start Review</h2>
+  <%= link_to "English to Pashto", review_flash_cards_path(mode: 'english_to_pashto'), class: "button" %>
+  <%= link_to "Pashto to English", review_flash_cards_path(mode: 'pashto_to_english'), class: "button" %>
+  <%= link_to "Mixed", review_flash_cards_path(mode: 'mixed'), class: "button" %>
+</div>
+
+<div class="cards-list">
+  <h2>All Cards</h2>
+  <table>
+    <tr>
+      <th>English</th>
+      <th>Pashto</th>
+    </tr>
+    <% @flash_cards.each do |card| %>
+      <tr>
+        <td><%= card.english_text %></td>
+        <td><%= card.pashto_text %></td>
+      </tr>
+    <% end %>
+  </table>
+</div> 

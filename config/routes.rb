@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root "flash_cards#index"
+  
+  resources :flash_cards do
+    collection do
+      get 'review'
+      post 'next_card'
+    end
+  end
 end

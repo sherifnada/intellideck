@@ -1,0 +1,27 @@
+<div class="review-container">
+  <div class="flash-card" data-controller="card">
+    <div class="card-inner" data-card-target="inner">
+      <div class="card-face card-front">
+        <% if @mode == 'pashto_to_english' %>
+          <div class="card-text"><%= @card.pashto_text %></div>
+        <% else %>
+          <div class="card-text"><%= @card.english_text %></div>
+        <% end %>
+        <button class="flip-button" data-action="click->card#flip">Flip Card</button>
+      </div>
+      
+      <div class="card-face card-back">
+        <% if @mode == 'pashto_to_english' %>
+          <div class="card-text"><%= @card.english_text %></div>
+        <% else %>
+          <div class="card-text"><%= @card.pashto_text %></div>
+        <% end %>
+        <%= button_to "Next Card", next_card_flash_cards_path, class: "next-button" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="review-controls">
+    <%= link_to "End Review", root_path, class: "end-review-button" %>
+  </div>
+</div> 
