@@ -2,6 +2,13 @@ class FlashCardsController < ApplicationController
   def index
     @flash_cards = FlashCard.all
     @flash_card = FlashCard.new
+    
+    case params[:sort]
+    when 'english'
+      @flash_cards = @flash_cards.order(Arel.sql("LOWER(english_text) #{params[:direction] || 'asc'}"))
+    when 'pashto'
+      @flash_cards = @flash_cards.order(Arel.sql("LOWER(pashto_text) #{params[:direction] || 'asc'}"))
+    end
   end
 
   def create

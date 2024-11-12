@@ -37,8 +37,24 @@
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">English</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pashto</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <div class="flex items-center space-x-1">
+                  <%= link_to "English", root_path(sort: 'english', direction: params[:sort] == 'english' && params[:direction] == 'asc' ? 'desc' : 'asc'), 
+                      class: "hover:text-gray-700" %>
+                  <% if params[:sort] == 'english' %>
+                    <span><%= params[:direction] == 'asc' ? '↑' : '↓' %></span>
+                  <% end %>
+                </div>
+              </th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <div class="flex items-center space-x-1">
+                  <%= link_to "Pashto", root_path(sort: 'pashto', direction: params[:sort] == 'pashto' && params[:direction] == 'asc' ? 'desc' : 'asc'),
+                      class: "hover:text-gray-700" %>
+                  <% if params[:sort] == 'pashto' %>
+                    <span><%= params[:direction] == 'asc' ? '↑' : '↓' %></span>
+                  <% end %>
+                </div>
+              </th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
