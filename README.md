@@ -11,3 +11,12 @@ todo list:
 5. "proper" spaced reptition. 
 6. Allow adding audio clips to flash cards. 
 7. Allow adding non-latin text to flash cards and having that be another axis of review maybe. 
+
+Some spaced repitition principles
+1.	Forgetting Curve: We naturally forget over time, with the rate depending on difficulty and frequency of review. Your app should calculate optimal intervals based on recall strength to ensure timely reviews, slowing forgetting.
+2.	Active Recall: Testing enhances memory. Each flashcard should require the user to actively retrieve the answer, not just passively review.
+3.	Graduated Interval: When a user remembers a card, increase the time before the next review. Intervals might start at 1 day, then 3 days, 7 days, etc., but should be adjustable based on each user’s recall.
+4.	Leitner System: A basic SRS setup where cards are grouped by “boxes” indicating their difficulty. Cards are reviewed more frequently in easier boxes and less in harder ones. If a card is remembered, it moves to a less frequent box. If forgotten, it moves to a more frequent box.
+5.	Ebbinghaus’ Spacing Effect: Spacing reviews over days, not cramming, boosts retention. Make sure cards are not shown too soon or too late—timing is key to retention without overburdening.
+6.	Ease and Difficulty Rating: Let users rate how easy or hard each flashcard was to recall. Use these ratings to adjust intervals dynamically. Cards marked “easy” can be delayed more than “hard” ones, which should reappear sooner.
+7.	Personalization: Learners progress at different speeds. Using metrics like success rate, adjust the frequency individually for each user to optimize learning speed and retention.
