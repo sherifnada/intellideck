@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :flash_cards do
     collection do
       get 'review'
-      post 'next_card'
+      post 'update_difficulty'
     end
   end
 end
