@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_12_202115) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_12_203311) do
   create_table "card_difficulties", force: :cascade do |t|
     t.integer "flash_card_id", null: false
     t.string "difficulty", default: "needs_practice", null: false
