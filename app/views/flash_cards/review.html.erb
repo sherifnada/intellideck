@@ -16,12 +16,24 @@
         <% else %>
           <div class="card-text"><%= @card.pashto_text %></div>
         <% end %>
-        <%= button_to "Next Card", next_card_flash_cards_path, class: "next-button" %>
+        
+        <div class="difficulty-buttons">
+          <p class="text-lg mb-4">How well did you know this word?</p>
+          <div class="flex space-x-4">
+            <%= button_to "Super Easy!", 
+                update_difficulty_flash_cards_path(card_id: @card.id, difficulty: 'super_easy'),
+                class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" %>
+            
+            <%= button_to "Need More Practice", 
+                update_difficulty_flash_cards_path(card_id: @card.id, difficulty: 'needs_practice'),
+                class: "px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600" %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="review-controls">
-    <%= link_to "End Review", root_path, class: "end-review-button" %>
+  <div class="review-controls mt-8">
+    <%= link_to "End Review", root_path, class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600" %>
   </div>
 </div> 
