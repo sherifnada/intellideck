@@ -1,41 +1,97 @@
-<h1>Pashto Flash Cards</h1>
+<div class="min-h-screen bg-gray-100 py-6 px-4">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-8">Pashto Flash Cards</h1>
 
-<div class="card">
-  <h2>Add New Card</h2>
-  <%= form_with(model: @flash_card, local: true) do |f| %>
-    <div>
-      <%= f.label :english_text, "English" %>
-      <%= f.text_field :english_text %>
+    <div class="bg-white rounded-lg shadow p-6 mb-8">
+      <h2 class="text-xl font-semibold mb-4">Add New Card</h2>
+      <%= form_with(model: @flash_card, local: true, class: "space-y-4") do |f| %>
+        <div>
+          <%= f.label :english_text, "English", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.text_field :english_text, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+        </div>
+
+        <div>
+          <%= f.label :pashto_text, "Pashto", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.text_field :pashto_text, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+        </div>
+
+        <%= f.submit "Create Card", class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      <% end %>
     </div>
 
-    <div>
-      <%= f.label :pashto_text, "Pashto" %>
-      <%= f.text_field :pashto_text %>
+    <div class="bg-white rounded-lg shadow p-6 mb-8">
+      <h2 class="text-xl font-semibold mb-4">Start Review</h2>
+      <div class="space-x-4">
+        <%= link_to "English to Pashto", review_flash_cards_path(mode: 'english_to_pashto'), 
+            class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700" %>
+        <%= link_to "Pashto to English", review_flash_cards_path(mode: 'pashto_to_english'), 
+            class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700" %>
+        <%= link_to "Mixed", review_flash_cards_path(mode: 'mixed'), 
+            class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700" %>
+      </div>
     </div>
 
-    <%= f.submit "Create Card" %>
-  <% end %>
-</div>
-
-<div class="review-options">
-  <h2>Start Review</h2>
-  <%= link_to "English to Pashto", review_flash_cards_path(mode: 'english_to_pashto'), class: "button" %>
-  <%= link_to "Pashto to English", review_flash_cards_path(mode: 'pashto_to_english'), class: "button" %>
-  <%= link_to "Mixed", review_flash_cards_path(mode: 'mixed'), class: "button" %>
-</div>
-
-<div class="cards-list">
-  <h2>All Cards</h2>
-  <table>
-    <tr>
-      <th>English</th>
-      <th>Pashto</th>
-    </tr>
-    <% @flash_cards.each do |card| %>
-      <tr>
-        <td><%= card.english_text %></td>
-        <td><%= card.pashto_text %></td>
-      </tr>
-    <% end %>
-  </table>
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+      <h2 class="text-xl font-semibold p-6 bg-gray-50">All Cards</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">English</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pashto</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <% @flash_cards.each do |card| %>
+              <tr id="flash_card_row_<%= card.id %>" class="hover:bg-gray-50">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= card.english_text %></td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= card.pashto_text %></td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                  <button type="button"
+                          data-action="flash-card#editCard"
+                          data-flash-card-target="editButton"
+                          data-card-id="<%= card.id %>"
+                          class="text-indigo-600 hover:text-indigo-900">
+                    Edit
+                  </button>
+                  <%= button_to "Delete", 
+                      flash_card_path(card), 
+                      method: :delete, 
+                      class: "text-red-600 hover:text-red-900",
+                      form: { class: "inline-block" },
+                      data: { turbo_confirm: "Are you sure?" } %>
+                </td>
+              </tr>
+              <tr id="edit_form_row_<%= card.id %>" class="hidden bg-gray-50">
+                <td colspan="3" class="px-6 py-4">
+                  <%= form_with(model: card, local: true, class: "space-y-4") do |f| %>
+                    <div class="flex space-x-4">
+                      <div class="flex-1">
+                        <%= f.label :english_text, "English", class: "block text-sm font-medium text-gray-700" %>
+                        <%= f.text_field :english_text, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+                      </div>
+                      <div class="flex-1">
+                        <%= f.label :pashto_text, "Pashto", class: "block text-sm font-medium text-gray-700" %>
+                        <%= f.text_field :pashto_text, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+                      </div>
+                    </div>
+                    <div class="flex space-x-2">
+                      <%= f.submit "Update", class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700" %>
+                      <button type="button"
+                              data-action="flash-card#cancelEdit"
+                              data-card-id="<%= card.id %>"
+                              class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Cancel
+                      </button>
+                    </div>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div> 

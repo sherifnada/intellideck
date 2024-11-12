@@ -48,6 +48,25 @@ class FlashCardsController < ApplicationController
     redirect_to review_flash_cards_path
   end
 
+  def edit
+    @flash_card = FlashCard.find(params[:id])
+  end
+
+  def update
+    @flash_card = FlashCard.find(params[:id])
+    if @flash_card.update(flash_card_params)
+      redirect_to root_path, notice: 'Card was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @flash_card = FlashCard.find(params[:id])
+    @flash_card.destroy
+    redirect_to root_path, notice: 'Card was successfully deleted.'
+  end
+
   private
 
   def flash_card_params

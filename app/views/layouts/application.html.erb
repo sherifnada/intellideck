@@ -12,15 +12,17 @@
   </head>
 
   <body>
-    <div class="container">
-      <% if notice %>
-        <div class="alert alert-success"><%= notice %></div>
-      <% end %>
-      <% if alert %>
-        <div class="alert alert-danger"><%= alert %></div>
-      <% end %>
+    <main data-controller="flash-card">
+      <div class="container">
+        <% if notice %>
+          <div class="alert alert-success"><%= notice %></div>
+        <% end %>
+        <% if alert %>
+          <div class="alert alert-danger"><%= alert %></div>
+        <% end %>
 
-      <%= yield %>
-    </div>
+        <%= yield %>
+      </div>
+    </main>
   </body>
 </html>
