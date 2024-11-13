@@ -3,14 +3,18 @@
 todo list: 
 1. Progress view. Tell me how many words in total I've learned, how many I've mastered, how many I'm so-so on. 
 1. Download my flash cards as a CSV.
-1. Mobile support. 
+1. Mobile support.
+   8. Make up AI-generated stories from the words that I know. Keep it simplified.
+9. Help me practice past-future-present tense of the same word, posessiveness, etc.. like different forms of the same thing
+10. Add a soundbite and grade me based on how well I pronounce/intonate
+11. Allow me to upload a photo of the word (or maybe generate an AI photo)
 1. Duplicate detection. If word already exists, prompt the user that a similar word already exists and ask if they want to skip adding this word. 
 2. Add more interesting ways to decide which cards to show, based on mastery. Basically implement spaced repition properly. 
 3. Better UI design
 4. Put it online somewhere and maybe add a login system. 
 5. "proper" spaced reptition. 
 6. Allow adding audio clips to flash cards. 
-7. Allow adding non-latin text to flash cards and having that be another axis of review maybe. 
+7. Allow adding non-latin text to flash cards and having that be another axis of review maybe.
 
 Some spaced repitition principles
 1.	Forgetting Curve: We naturally forget over time, with the rate depending on difficulty and frequency of review. Your app should calculate optimal intervals based on recall strength to ensure timely reviews, slowing forgetting.
