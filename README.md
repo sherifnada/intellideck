@@ -1,7 +1,8 @@
 # README
 
 todo list: 
-1. Progress view. Tell me how many words in total I've learned, how many I've mastered, how many I'm so-so on. 
+1. Progress view. Tell me how many words in total I've learned, how many I've mastered, how many I'm so-so on. Also do this within a review session. 
+2. Tags for words e.g: "time of day" or "posessive" etc.. so I can review things related to a specific category
 1. Download my flash cards as a CSV.
 1. Mobile support.
    8. Make up AI-generated stories from the words that I know. Keep it simplified.
