@@ -26,7 +26,6 @@ class FlashCardsController < ApplicationController
     # card instead of whatever the fuck is happening now
     session[:review_mode] = params[:mode] if params[:mode]
     session[:current_cards] = FlashCard.random_batch.pluck(:id)
-    binding.pry
     if session[:current_cards].empty?
       redirect_to root_path, notice: "Review session completed!"
       return

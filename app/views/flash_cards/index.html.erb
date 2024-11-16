@@ -32,7 +32,10 @@
     </div>
 
     <div class="bg-white rounded-lg shadow overflow-hidden">
-      <h2 class="text-xl font-semibold p-6 bg-gray-50">All Cards</h2>
+      <div class="flex justify-between items-center p-6 bg-gray-50">
+        <h2 class="text-xl font-semibold">All Cards</h2>
+        <span class="text-sm text-gray-600">Total Cards: <%= @flash_cards.count %></span>
+      </div>
       <div class="overflow-x-auto" data-controller="flash-card">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
