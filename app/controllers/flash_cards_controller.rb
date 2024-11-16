@@ -3,11 +3,15 @@ class FlashCardsController < ApplicationController
     @flash_cards = FlashCard.all
     @flash_card = FlashCard.new
     
+    # Set default sort to english descending if no sort params
+    params[:sort] ||= 'english'
+    params[:direction] ||= 'asc'
+    
     case params[:sort]
     when 'english'
-      @flash_cards = @flash_cards.order(Arel.sql("LOWER(english_text) #{params[:direction] || 'asc'}"))
+      @flash_cards = @flash_cards.order(Arel.sql("LOWER(english_text) #{params[:direction]}"))
     when 'pashto'
-      @flash_cards = @flash_cards.order(Arel.sql("LOWER(pashto_text) #{params[:direction] || 'asc'}"))
+      @flash_cards = @flash_cards.order(Arel.sql("LOWER(pashto_text) #{params[:direction]}"))
     end
   end
 
@@ -22,10 +26,18 @@ class FlashCardsController < ApplicationController
   end
 
   def review
-    # TODO all cards should be available and clicking "next" should just move us to the next 
-    # card instead of whatever the fuck is happening now
     session[:review_mode] = params[:mode] if params[:mode]
-    session[:current_cards] = FlashCard.random_batch.pluck(:id)
+    session[:days_ago] = params[:days_ago].to_i if params[:days_ago]
+    
+    # Get cards based on mode
+    cards = if params[:mode] == 'recent'
+      FlashCard.where('created_at >= ?', session[:days_ago].days.ago).random_batch
+    else
+      FlashCard.random_batch
+    end
+    
+    session[:current_cards] ||= cards.pluck(:id)
+    
     if session[:current_cards].empty?
       redirect_to root_path, notice: "Review session completed!"
       return
